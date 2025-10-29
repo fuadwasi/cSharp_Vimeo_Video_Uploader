@@ -1,0 +1,13 @@
+{
+  "VimeoAccessToken": "YOUR_VIMEO_ACCESS_TOKEN_HERE",
+  "VideoDirectory": "/path/to/your/videos",
+  "SupportedExtensions": [
+    ".mp4",
+    ".mov",
+    ".avi"
+  ],
+  "LogFilePath": "upload_log.txt",
+  "UploadedVideosFilePath": "uploaded_videos.json",
+  "MaxRetryAttempts": 3,
+  "RetryDelayMs": 2000
+}
