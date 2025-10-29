@@ -8,12 +8,13 @@ namespace VimeoVideoUploader.Services;
 /// <summary>
 /// Handles video uploads to Vimeo using their API
 /// </summary>
-public class VideoUploader
+public class VideoUploader : IDisposable
 {
     private readonly HttpClient _httpClient;
     private readonly Logger _logger;
     private readonly AppConfig _config;
     private const string VimeoApiBaseUrl = "https://api.vimeo.com";
+    private bool _disposed = false;
 
     public VideoUploader(AppConfig config, Logger logger)
     {
@@ -185,10 +186,26 @@ public class VideoUploader
     }
 
     /// <summary>
-    /// Disposes the HttpClient
+    /// Disposes the HttpClient and releases resources
     /// </summary>
     public void Dispose()
     {
-        _httpClient.Dispose();
+        Dispose(true);
+        GC.SuppressFinalize(this);
+    }
+
+    /// <summary>
+    /// Protected implementation of Dispose pattern
+    /// </summary>
+    protected virtual void Dispose(bool disposing)
+    {
+        if (!_disposed)
+        {
+            if (disposing)
+            {
+                _httpClient.Dispose();
+            }
+            _disposed = true;
+        }
     }
 }

@@ -38,7 +38,8 @@ class Program
 
             // Initialize services
             var uploadRecordManager = new UploadRecordManager(config.UploadedVideosFilePath, logger);
-            var videoUploader = new VideoUploader(config, logger);
+            
+            using var videoUploader = new VideoUploader(config, logger);
 
             // Get video files
             var videoFiles = videoUploader.GetVideoFiles();
@@ -108,7 +109,6 @@ class Program
 
             logger.LogInfo($"Application completed - Success: {successCount}, Skipped: {skippedCount}, Failed: {failedCount}");
             
-            videoUploader.Dispose();
             return failedCount > 0 ? 1 : 0;
         }
         catch (Exception ex)
