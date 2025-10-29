@@ -52,3 +52,8 @@ CodeCoverage/
 *.VisualState.xml
 TestResult.xml
 nunit-*.xml
+
+# Application-specific files
+config.json
+upload_log.txt
+uploaded_videos.json
